@@ -1,13 +1,5 @@
 # User
 .DS_Store
-data/base2
-data/legacy
-output/
-EventTriplesExtraction/ltp_models
-data
-data/base2
-data/legacy
-EventTriplesExtraction
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -138,5 +130,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-.gitignore
-EventTriplesExtraction
