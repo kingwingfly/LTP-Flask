@@ -12,6 +12,7 @@
 [模型获取 Base2](https://huggingface.co/LTP/base2)  
 [模型获取 Legacy](https://huggingface.co/LTP/legacy)  
 目录结构： 
+![image](https://user-images.githubusercontent.com/38573173/202848279-f50e3c9c-59f6-4fd6-b8c0-226caa106211.png)
 
 
 ## 端口
