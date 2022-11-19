@@ -3,6 +3,10 @@
 data/base2
 data/legacy
 output/
+EventTriplesExtraction\ltp_models
+data
+data\base2
+data\legacy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
