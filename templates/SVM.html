@@ -1894,7 +1894,7 @@
         <label><input type="checkbox" name="task" value="pos">词性</label>
         <label><input type="checkbox" name="task" value="ner">命名实体</label>
       </ul>
-      <p>文件路径：<input type="text" placeholder="文件路径" id="dirpath"></p>
+      <p>文件路径：<input type="text" placeholder="./example" id="dirpath" value="./example"></p>
       <p><input type="button" value="Run" id="run-btn"></p>
     </div>
   </div>
@@ -1905,14 +1905,37 @@
 <script>
   var runBtn = document.getElementById('run-btn');
   var dirpath = document.getElementById('dirpath');
+  var flag = true
 
   function taskList() {
+    flag = true
+    check_val = []
     tasks = document.getElementsByName('task');
-    check_val = [];
+    if (tasks[2].checked) {
+      if (!tasks[1].checked) {
+        alert('命名实体标注 依赖 词性标注');
+        tasks[1].checked = true;
+        flag = false;
+        return
+      }
+    }
+    if (tasks[1].checked) {
+      if (!tasks[0].checked) {
+        alert('词性标注 依赖 分词');
+        tasks[0].checked = true;
+        flag = false;
+        return
+      }
+    }
     for (k in tasks) {
       if (tasks[k].checked) {
         check_val.push(tasks[k].value);
       }
+    }
+    if (check_val=='') {
+      alert('任务为空！')
+      flag = false
+      return
     }
     return check_val
   }
@@ -1931,21 +1954,22 @@
     }
     document.body.appendChild(formEltTemp);
     formEltTemp.submit();
-    // document.body.removeChild(formEltTemp);
+    document.body.removeChild(formEltTemp);
   }
 
   runBtn.onclick = function () {
-    tasks = taskList();
+    check_var = taskList()
+    if (!flag) {
+      return
+    }
     var params = {
       'method': 'SVM',
       'dirpath': dirpath.value,
-      'tasks': tasks,
-    }
+      'tasks': check_val,
+    };
     msg = '方法：' + params['method'] + '\n目标路径：' + params['dirpath'] + '\n任务：' + params['tasks'];
     if (params['dirpath']=='') {
-      alert('路径不能为空！')
-    } else if (tasks == 'cws,ner') {
-      alert('命名实体识别依赖于词性标注，需勾选‘词性标注’')
+      alert('路径不能为空！');
     } else if (confirm(msg)) {
       httpPost('/result', params);
     }

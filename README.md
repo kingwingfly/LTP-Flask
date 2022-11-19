@@ -14,6 +14,8 @@
 目录结构： 
 ![image](https://user-images.githubusercontent.com/38573173/202848279-f50e3c9c-59f6-4fd6-b8c0-226caa106211.png)
 
+## 三元组
+算法来源：https://github.com/kingwingfly/EventTriplesExtraction
 
 ## 端口
 默认 8848 
@@ -38,3 +40,22 @@ output文件夹内
 
 ## 其它
 发现问题，您可以在Issues里告诉我，我有空会fix
+
+## 相关文献
+
+> @article{che2020n,
+>   title={N-LTP: A Open-source Neural Chinese Language Technology Platform with Pretrained Models},
+>   author={Che, Wanxiang and Feng, Yunlong and Qin, Libo and Liu, Ting},
+>   journal={arXiv preprint arXiv:2009.11616},
+>   year={2020}
+> }
+
+> @misc{zhang2020practical,
+>     title={A Practical Chinese Dependency Parser Based on A Large-scale Dataset},
+>     author={Shuai Zhang and Lijie Wang and Ke Sun and Xinyan Xiao},
+>     year={2020},
+>     eprint={2009.00901},
+>     archivePrefix={arXiv},
+>     primaryClass={cs.CL}
+> }
+

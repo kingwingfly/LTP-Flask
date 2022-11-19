@@ -1881,22 +1881,22 @@
       text-decoration: underline;
     }
   </style>
-  <title>DNN</title>
+  <title>Triples</title>
 </head>
 
 <body class='typora-export os-windows'>
   <div class='typora-export-content'>
     <div id='write' class=' first-line-indent'>
-      <h1 id='dnn'><span>DNN</span></h1>
+      <h1 id='svm'><span>Truples</span></h1>
       <p><a href="/"><span>返回上一页</span></a><span> </span></p>
-      <ul>任务选择:
-        <label><input type="checkbox" name="task" value="cws">分词</label>
-        <label><input type="checkbox" name="task" value="pos">词性</label>
-        <label><input type="checkbox" name="task" value="ner">命名实体</label>
-        <label><input type="checkbox" name="task" value="srl">语义角色</label>
-        <label><input type="checkbox" name="task" value="dep">依存句法</label>
-        <label><input type="checkbox" name="task" value="sdp">语义依存</label>
-        <label><input type="checkbox" name="task" value="sdpg">SDPG</label>
+      <ul>是否已安装CUDA：
+        <label><input type="radio" name="cuda" value=true>是</label>
+        <label><input type="radio" name="cuda" value=false checked>否</label>
+      </ul>
+      <ul>任务选择：
+        <li><input type="radio" name="task" value="LTP">基于LTP依存句法与语义角色标注（暂不支持，需要对开源项目进行重构）</li>
+        <li><input type="radio" name="task" value="Baidu DDParser">基于百度DDparser依存句法分析</li>
+        <li><input type="radio" name="task" value="jieba">基于词性模版规则（jieba）</li>
       </ul>
       <p>文件路径：<input type="text" placeholder="./example" id="dirpath" value="./example"></p>
       <p><input type="button" value="Run" id="run-btn"></p>
@@ -1915,54 +1915,6 @@
     flag = true
     check_val = []
     tasks = document.getElementsByName('task');
-    if (tasks[6].checked) {
-      if (!tasks[0].checked) {
-        alert('SDPG 依赖 分词');
-        tasks[0].checked = true;
-        flag = false;
-        return
-      }
-    }
-    if (tasks[5].checked) {
-      if (!tasks[0].checked) {
-        alert('语义依存 依赖 分词');
-        tasks[0].checked = true;
-        flag = false;
-        return
-      }
-    }
-    if (tasks[4].checked) {
-      if (!tasks[0].checked) {
-        alert('依存句法 依赖 分词');
-        tasks[0].checked = true;
-        flag = false;
-        return
-      }
-    }
-    if (tasks[3].checked) {
-      if (!tasks[0].checked) {
-        alert('语义角色标注 依赖 分词');
-        tasks[0].checked = true;
-        flag = false;
-        return
-      }
-    }
-    if (tasks[2].checked) {
-      if (!tasks[1].checked) {
-        alert('命名实体标注 依赖 词性标注');
-        tasks[1].checked = true;
-        flag = false;
-        return
-      }
-    }
-    if (tasks[1].checked) {
-      if (!tasks[0].checked) {
-        alert('词性标注 依赖 分词');
-        tasks[0].checked = true;
-        flag = false;
-        return
-      }
-    }
     for (k in tasks) {
       if (tasks[k].checked) {
         check_val.push(tasks[k].value);
@@ -1999,15 +1951,15 @@
       return
     }
     var params = {
-      'method': 'DNN',
+      'cuda': true,
       'dirpath': dirpath.value,
-      'tasks': check_val,
+      'method': check_val,
     }
-    msg = '方法：' + params['method'] + '\n目标路径：' + params['dirpath'] + '\n任务：' + params['tasks'];
+    msg = '是否CUDA加速：' + params['cuda'] + '\n目标路径：' + params['dirpath'] + '\n方法：' + params['method'];
     if (params['dirpath']=='') {
       alert('路径不能为空！')
     } else if (confirm(msg)) {
-      httpPost('/result', params);
+      httpPost('/triplesResult', params);
     }
   }
 </script>

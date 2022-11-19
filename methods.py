@@ -4,7 +4,7 @@ import os
 import shutil
 from time import time, asctime
 import asyncio
-
+# todo asyncio实现异步保存
 
 device = torch.device('cuda:0') if torch.cuda.is_available() else 'cpu'
 workspace = os.path.dirname(__file__)
@@ -21,6 +21,7 @@ zh_tasks = {
 
 def generate_lst(path):
     lst = []
+    # todo迭代器取代
     for dirpath, _, filenames in os.walk(path):
         for filename in filenames:
             if filename.endswith('.txt'):
@@ -38,7 +39,7 @@ def save_results(output):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     for task, result in output.items():
-        print('\n', task, '\n' , result, '-'*50)
+        print('\n', task, '\n' , result, '\n', '-'*50)
         filename = os.path.join(output_dir, f'{task}_output.txt')
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(str(result))
@@ -53,7 +54,6 @@ def dnnMethod(dirpath, tasks, queue):
     # print(output.pos)
     # print(output.ner)
     save_results(output)
-    queue.put(True)
 
 
 def svmMethod(dirpath, tasks, queue):
@@ -70,10 +70,9 @@ def svmMethod(dirpath, tasks, queue):
     print(cws, pos, ner)
     '''
     save_results(output)
-    queue.put(True)
 
 
 if __name__ == '__main__':
     path = './example'
     tasks = ['cws', 'pos', 'ner']
-    svmMethod(path, tasks)
+    # svmMethod(path, tasks)

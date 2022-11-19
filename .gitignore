@@ -1,3 +1,9 @@
+# User
+.DS_Store
+data/base2
+data/legacy
+output/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
